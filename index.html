@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta: Ética, Ciudadanía y Futuro - Módulo 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #f8fafc; }
+        .text-accent-green { color: #2d6a4f; }
+        .bg-accent-green { background-color: #2d6a4f; }
+        .btn-green { @apply bg-[#40916c] text-white px-6 py-2 rounded-full hover:bg-[#2d6a4f] transition-all font-semibold shadow-md hover:shadow-lg; }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        
+        /* Estilos personalizados para el acordeón de referencias */
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-accent-green tracking-tight"><i class="fas fa-leaf mr-2 text-green-500"></i>CONECTA</h1>
+            <div class="hidden md:flex space-x-8 text-sm font-bold text-gray-600">
+                <a href="#inicio" class="hover:text-green-600 transition-colors">Inicio</a>
+                <a href="#temario" class="hover:text-green-600 transition-colors">Temario</a>
+                <a href="#justificacion" class="hover:text-green-600 transition-colors">Justificación</a>
+                <a href="#conclusiones" class="hover:text-green-600 transition-colors">Conclusiones</a>
+            </div>
+            <a href="#temario" class="hidden md:block bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-800 transition">Explorar Módulo</a>
+            <button class="md:hidden text-gray-800 text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- INICIO (HERO) -->
+    <section id="inicio" class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-50 to-blue-50 -z-10"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+        <div class="absolute top-24 -left-24 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+        
+        <div class="container mx-auto text-center max-w-4xl">
+            <span class="bg-white border border-green-200 text-green-700 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-sm inline-flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Módulo 3 Interactivo
+            </span>
+            <h2 class="text-5xl md:text-7xl font-extrabold mt-8 mb-6 text-gray-900 leading-tight tracking-tighter">
+                Construyendo el <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Futuro Ético</span>
+            </h2>
+            <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                Un recorrido por el capital social, la ciudadanía global, la inclusión y la empatía como pilares de nuestro proyecto de vida en el siglo XXI.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#temario" class="btn-green text-lg px-8 py-4"><i class="fas fa-book-open mr-2"></i> Iniciar Aprendizaje</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="temario" class="container mx-auto px-4 py-16 space-y-24 max-w-6xl">
+
+        <!-- 12.2 CAPITAL SOCIAL -->
+        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-200/50 border border-gray-100">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 text-blue-600 mb-6">
+                        <i class="fas fa-network-wired text-xl"></i>
+                    </div>
+                    <span class="text-sm font-bold text-blue-500 tracking-wider uppercase">Tema 12.2</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Capital social y ciudadanía</h3>
+                    <div class="prose text-gray-600 leading-relaxed">
+                        <p class="mb-4">El capital social se refiere a las redes de relaciones, normas y confianza que permiten la cooperación entre personas para lograr beneficios comunes.</p>
+                        <p class="mb-4">Actúa como un indicador del valor de los recursos que se generan a través de las relaciones interpersonales. Funciona como un termómetro del grado de cohesión de un grupo y define qué tan capaces son las personas de transformar sus vínculos en oportunidades reales.</p>
+                        <p>En esencia, mide la <strong>sociabilidad operativa</strong>: esa habilidad colectiva para organizarse, trabajar en equipo y ejecutar acciones que beneficien al conjunto.</p>
+                    </div>
+                    
+                    <!-- Ejemplo de aplicación -->
+                    <div class="mt-8 bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-xl">
+                        <h4 class="font-bold text-blue-900 flex items-center gap-2"><i class="fas fa-lightbulb text-blue-500"></i> Ejemplo de aplicación</h4>
+                        <p class="text-blue-800 text-sm mt-2">Una comunidad que organiza redes vecinales para seguridad o limpieza muestra capital social, ya que coopera para mejorar su entorno.</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- Image Placeholder -->
+                    <div class="w-full h-48 rounded-2xl overflow-hidden shadow-md relative group">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://picsum.photos/800/400?random=1'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/70 to-transparent flex items-end p-4">
+                            <span class="text-white font-bold text-sm drop-shadow-md">Capital Social en Acción</span>
+                        </div>
+                    </div>
+                    <!-- Videos -->
+                    <div class="flex flex-col gap-3">
+                        <a href="https://youtu.be/aeOvpnszDNA" target="_blank" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 rounded-xl p-4 flex items-center justify-between transition-colors shadow-sm group">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-200 text-blue-600 rounded-full w-10 h-10 flex items-center justify-center"><i class="fab fa-youtube text-lg"></i></div>
+                                <div>
+                                    <p class="font-bold text-sm">El juego de las reglas</p>
+                                    <p class="text-xs text-blue-500">Video explicativo</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-blue-400 group-hover:text-blue-600"></i>
+                        </a>
+                        <a href="https://youtu.be/YTQ2H--99Wg" target="_blank" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 rounded-xl p-4 flex items-center justify-between transition-colors shadow-sm group">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-200 text-blue-600 rounded-full w-10 h-10 flex items-center justify-center"><i class="fab fa-youtube text-lg"></i></div>
+                                <div>
+                                    <p class="font-bold text-sm">¿Qué es el capital social?</p>
+                                    <p class="text-xs text-blue-500">Concepto clave</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-blue-400 group-hover:text-blue-600"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Referencias Acordeón -->
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 group">
+                        <summary class="font-bold text-gray-700 p-4 flex justify-between items-center">
+                            <span><i class="fas fa-book mr-2 text-gray-400"></i> Referencias APA</span>
+                            <i class="fas fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <div class="p-4 pt-0 text-xs text-gray-500 space-y-2 border-t border-gray-200 mt-2">
+                            <p>Academia Lab. (2026). Capital social. Enciclopedia. https://academia-lab.com/enciclopedia/capital-social/</p>
+                            <p>Capital social - Solecopedia. (2018). Socioeco.org. https://solecov1.socioeco.org/wiki/es/Capital_social</p>
+                            <p>Wikipedia. (2004). Capital social (sociología). https://es.wikipedia.org/wiki/Capital_social_%28sociolog%C3%ADa%29</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12.3 CIUDADANÍA GLOBAL -->
+        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-200/50 border border-gray-100">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 space-y-6">
+                    <!-- Image Placeholder -->
+                    <div class="w-full h-56 rounded-2xl overflow-hidden shadow-lg border border-gray-100 relative group">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://picsum.photos/800/500?random=2'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent flex items-end p-4">
+                            <span class="text-white font-bold text-sm drop-shadow-md">Hiperconexión Global</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.youtube.com/live/oGLcouSMZBg" target="_blank" class="bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 rounded-xl p-4 flex items-center justify-between transition-colors shadow-sm group">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-purple-200 text-purple-600 rounded-full w-10 h-10 flex items-center justify-center"><i class="fab fa-youtube text-lg"></i></div>
+                            <div>
+                                <p class="font-bold text-sm">Ciudadanía Global</p>
+                                <p class="text-xs text-purple-500">Transmisión en directo</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-external-link-alt text-purple-400 group-hover:text-purple-600"></i>
+                    </a>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 text-purple-600 mb-6">
+                        <i class="fas fa-satellite-dish text-xl"></i>
+                    </div>
+                    <span class="text-sm font-bold text-purple-500 tracking-wider uppercase">Tema 12.3</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Ciudadanía global y tecnología</h3>
+                    
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Definida por la <strong>hiperconexión tecnológica</strong>, transforma la participación social, política y económica. Impulsa el diálogo intercultural, el pensamiento crítico y nuevas formas de activismo. Requiere competencias digitales para navegar entornos de IA, combatir desinformación y proteger datos.
+                    </p>
+
+                    <div class="bg-gray-50 rounded-xl p-6 mb-6 border border-gray-100">
+                        <h5 class="font-bold text-gray-800 mb-3">Impactos tecnológicos:</h5>
+                        <ul class="space-y-2 text-gray-600 text-sm">
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Mayor acceso a información.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Participación digital y activismo online.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Conexión intercultural.</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-exclamation-triangle text-yellow-500"></i> Retos: desinformación y desigualdad digital.</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                        <a href="https://aprendeencasa.sep.gob.mx/secundaria/juguemos-ciudadania-viva/" target="_blank" class="bg-purple-600 text-white px-5 py-3 rounded-xl font-bold text-sm hover:bg-purple-700 transition flex items-center justify-center gap-2 shadow-md hover:-translate-y-1">
+                            <i class="fas fa-gamepad"></i> Actividad: Ciudadanía Viva
+                        </a>
+                    </div>
+
+                    <!-- Ejemplo -->
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-xl mb-6">
+                        <p class="text-purple-800 text-sm"><strong>Ejemplo:</strong> Un movimiento global en redes sociales (como campañas ambientales) donde jóvenes de distintos países participan activamente.</p>
+                    </div>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 group">
+                        <summary class="font-bold text-gray-700 p-3 text-sm flex justify-between items-center">
+                            <span>Referencias APA</span><i class="fas fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <div class="p-3 pt-0 text-xs text-gray-500 space-y-2 border-t border-gray-200 mt-2">
+                            <p>Euroinnova. (2024). Ciudadanía digital.</p>
+                            <p>Subtema 12.3. (2025). Google Sites.</p>
+                            <p>ProFuturo. (2021). Se buscan ciudadanos globales. Razón: siglo XXI.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13.2 CONVIVENCIA Y EXCLUSIÓN -->
+        <section class="bg-gray-900 text-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <!-- Background pattern -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+            
+            <div class="relative z-10 grid lg:grid-cols-5 gap-12 items-center">
+                <div class="lg:col-span-2">
+                    <span class="text-sm font-bold text-orange-400 tracking-wider uppercase">Tema 13.2</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold mt-2 mb-6">Convivencia y exclusión</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        La convivencia implica la interacción respetuosa basada en valores como tolerancia y respeto. En contraste, la <strong class="text-white">exclusión social</strong> ocurre cuando ciertos grupos son marginados por razones económicas, culturales o sociales, limitando oportunidades y debilitando la cohesión y el capital social.
+                    </p>
+                    
+                    <div class="bg-gray-800/80 border-l-4 border-orange-500 p-5 rounded-r-xl backdrop-blur-sm mb-8">
+                        <p class="text-gray-200 text-sm"><strong>Ejemplo de exclusión:</strong> Un estudiante que es marginado o sufre burlas por su origen social o su forma de hablar.</p>
+                    </div>
+
+                    <a href="https://educrea.cl/10-estrategias-para-ensenar-normas-de-convivencia-en-el-aula/" target="_blank" class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-bold transition">
+                        <i class="fas fa-chalkboard-teacher"></i> Dinámica para el aula
+                    </a>
+                </div>
+
+                <div class="lg:col-span-3 grid sm:grid-cols-2 gap-6">
+                    <a href="https://youtu.be/7v7aC0IGsDU" target="_blank" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-2xl p-5 flex flex-col items-center text-center transition-colors shadow-xl group">
+                        <i class="fab fa-youtube text-4xl text-orange-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-gray-200 font-bold mb-1">Exclusión y sociedad</p>
+                        <p class="text-xs text-gray-400 flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Ver video</p>
+                    </a>
+                    
+                    <a href="https://youtu.be/tPN4js9MAU8" target="_blank" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-2xl p-5 flex flex-col items-center text-center transition-colors shadow-xl group">
+                        <i class="fab fa-youtube text-4xl text-orange-500 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-gray-200 font-bold mb-1">Importancia de la Inclusión</p>
+                        <p class="text-xs text-gray-400 flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Ver video</p>
+                    </a>
+                    
+                    <div class="sm:col-span-2">
+                        <details class="bg-gray-800 rounded-xl border border-gray-700 group mt-2">
+                            <summary class="font-bold text-gray-300 p-3 text-sm flex justify-between items-center cursor-pointer hover:bg-gray-700 rounded-xl transition">
+                                <span>Referencias APA</span><i class="fas fa-chevron-down text-gray-500 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-4 pt-0 text-xs text-gray-400 space-y-2 mt-2">
+                                <p>UNIR México. (2025). ¿Qué es la exclusión social y cuáles son sus causas?</p>
+                                <p>Turismo Accesible a Todas Las Personas. (2020). Diferencias entre exclusión, segregación, integración e inclusión.</p>
+                                <p>Liberties.eu. (2021). Exclusión social: definición, impacto, ejemplos.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14.1 EMPATÍA Y ESCUCHA -->
+        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-gray-200/50 border border-gray-100">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-red-100 text-red-500 mb-6">
+                        <i class="fas fa-heart text-xl"></i>
+                    </div>
+                    <span class="text-sm font-bold text-red-400 tracking-wider uppercase">Tema 14.1</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Empatía y escucha activa</h3>
+                    
+                    <div class="flex gap-4 mb-6">
+                        <div class="w-1 bg-red-400 rounded-full"></div>
+                        <p class="text-gray-600 leading-relaxed">
+                            La <strong>empatía</strong> es la capacidad de comprender y compartir los sentimientos de otros. La <strong>escucha activa</strong> implica prestar atención consciente y sin juicio. Ambas resuelven conflictos y generan confianza.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                            <i class="fas fa-hands-helping text-red-400 text-2xl mb-2"></i>
+                            <h5 class="font-bold text-gray-800 text-sm">Resuelve Conflictos</h5>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                            <i class="fas fa-handshake text-red-400 text-2xl mb-2"></i>
+                            <h5 class="font-bold text-gray-800 text-sm">Fortalece Convivencia</h5>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-5 border border-gray-200 mb-6 flex flex-col items-start gap-3">
+                        <h5 class="font-bold text-gray-800 text-sm"><i class="fas fa-shoe-prints text-gray-500 mr-2"></i> Actividad Lúdica: "¡Camina un rato con mis zapatos!"</h5>
+                        <a href="https://coruna.britishinternationalschool.com/noticias-coruna/~board/coruna-es/post/actividades-trabajar-empatia-aula-secundaria" target="_blank" class="text-sm text-red-500 font-bold hover:underline">Ver instrucciones del Role-playing &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Image -->
+                    <div class="w-full h-40 rounded-2xl overflow-hidden shadow-md border border-gray-100 relative group">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://picsum.photos/800/400?random=3'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-red-900/70 to-transparent flex items-end p-4">
+                            <span class="text-white font-bold text-sm drop-shadow-md">Práctica de Escucha Activa</span>
+                        </div>
+                    </div>
+                    <!-- Video -->
+                    <a href="https://youtu.be/KZBTYViDPlQ" target="_blank" class="bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 rounded-xl p-4 flex items-center justify-between transition-colors shadow-sm group">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-200 text-red-600 rounded-full w-10 h-10 flex items-center justify-center"><i class="fab fa-youtube text-lg"></i></div>
+                            <div>
+                                <p class="font-bold text-sm">Empatía y escucha activa</p>
+                                <p class="text-xs text-red-500">Material audiovisual</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-external-link-alt text-red-400 group-hover:text-red-600"></i>
+                    </a>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 group">
+                        <summary class="font-bold text-gray-700 p-3 text-sm flex justify-between items-center cursor-pointer">
+                            <span>Referencias APA</span><i class="fas fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <div class="p-3 pt-0 text-xs text-gray-500 space-y-2 border-t border-gray-200 mt-2">
+                            <p>Psicologiaymente.com. (2020). Escucha empática: claves para comprender esta habilidad.</p>
+                            <p>UNIR México. Escucha activa: qué es, características, tipos y ventajas.</p>
+                            <p>Beyond Intractability. (2026). Empathic Listening.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15.2 PROYECTO DE VIDA -->
+        <section class="bg-green-50 rounded-[2.5rem] p-8 md:p-12 border border-green-200">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-sm font-bold text-green-600 tracking-wider uppercase">Tema 15.2</span>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4">Proyecto de vida y nuevo imperativo categórico</h3>
+                <p class="text-gray-600 text-lg">
+                    La planificación consciente de nuestro futuro. Inspirado en Hans Jonas, el "nuevo imperativo categórico" nos exige que nuestras acciones consideren su impacto en el futuro y el planeta.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-green-100 flex flex-col items-center justify-center text-center group hover:bg-green-50 transition-colors">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Imperativo Categórico</h4>
+                    <p class="text-xs text-gray-500 mb-4">YouTube Short explicativo</p>
+                    <a href="https://youtube.com/shorts/wUBpVVtAuPU" target="_blank" class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-bold hover:bg-green-200 flex items-center gap-2 transition-colors">
+                        <i class="fas fa-external-link-alt"></i> Abrir Short
+                    </a>
+                </div>
+                <!-- Interactive Box -->
+                <div class="md:col-span-2 flex flex-col justify-between">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-green-100 mb-6">
+                        <h4 class="font-bold text-xl mb-3 text-gray-800"><i class="fas fa-leaf text-green-500 mr-2"></i> Tu Aplicación</h4>
+                        <p class="text-sm text-gray-600 mb-4"><strong>Ejemplo:</strong> Elegir una carrera o estilo de vida que contribuya al desarrollo sostenible.</p>
+                        <a href="https://www.ejemplos.co/imperativo-categorico/" target="_blank" class="text-green-600 text-sm font-bold hover:underline block mb-4">Actividad: Reflexión sobre máximas universales &rarr;</a>
+                        
+                        <div class="mt-4">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Construye tu propósito ético:</label>
+                            <textarea id="commitment-input" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-400 outline-none resize-none text-gray-700 bg-gray-50" rows="3" placeholder="Mi proyecto de vida impactará positivamente a la sociedad mediante..."></textarea>
+                            <div class="flex items-center justify-between mt-3">
+                                <span id="save-msg" class="text-green-600 text-sm font-bold opacity-0 transition-opacity"><i class="fas fa-check-circle"></i> Guardado en tu sesión</span>
+                                <button onclick="saveCommitment()" class="btn-green text-sm px-4 py-2">Comprometerse</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://youtu.be/EhJ_fW8xzvY" target="_blank" class="bg-white hover:bg-green-50 p-4 rounded-2xl shadow-sm border border-green-100 flex items-center justify-between transition-colors group">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-green-100 text-green-600 rounded-full w-10 h-10 flex items-center justify-center"><i class="fab fa-youtube text-lg"></i></div>
+                            <div>
+                                <p class="font-bold text-gray-800 text-sm">Video Educativo</p>
+                                <p class="text-xs text-gray-500">Proyecto de vida</p>
+                            </div>
+                        </div>
+                        <span class="text-green-600 text-xs font-bold uppercase flex items-center gap-2 group-hover:text-green-700"><i class="fas fa-external-link-alt"></i> Ver en YouTube</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                 <details class="bg-white inline-block text-left rounded-xl border border-gray-200 group w-full max-w-2xl mx-auto">
+                    <summary class="font-bold text-gray-700 p-3 text-sm flex justify-between items-center cursor-pointer">
+                        <span>Referencias APA</span><i class="fas fa-chevron-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-3 pt-0 text-xs text-gray-500 space-y-2 border-t border-gray-200 mt-2">
+                        <p>Biscontini, T. (2024). Categorical imperative. EBSCO.</p>
+                        <p>Psicología y Mente. El imperativo categórico de Immanuel Kant: ¿qué es?</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JUSTIFICACIÓN -->
+    <section id="justificacion" class="bg-white py-20 px-6 border-t border-gray-100">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-extrabold text-gray-900">¿Por qué son esenciales estos temas?</h3>
+                <p class="text-gray-500 mt-3">Justificación del aprendizaje significativo</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition border border-transparent hover:border-green-100">
+                    <i class="fas fa-users text-3xl text-green-500 mb-4"></i>
+                    <h4 class="font-bold mb-2">Sociedades Funcionales</h4>
+                    <p class="text-sm text-gray-600">El <strong>capital social</strong> nos permite entender que la cooperación y las relaciones de confianza son la base de cualquier comunidad exitosa.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-purple-50 transition border border-transparent hover:border-purple-100">
+                    <i class="fas fa-globe text-3xl text-purple-500 mb-4"></i>
+                    <h4 class="font-bold mb-2">Mundo Interconectado</h4>
+                    <p class="text-sm text-gray-600">La <strong>ciudadanía global</strong> nos prepara para actuar éticamente frente a los retos tecnológicos del siglo XXI.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-orange-50 transition border border-transparent hover:border-orange-100">
+                    <i class="fas fa-balance-scale text-3xl text-orange-500 mb-4"></i>
+                    <h4 class="font-bold mb-2">Sensibilidad Social</h4>
+                    <p class="text-sm text-gray-600">Entender la dinámica entre <strong>convivencia y exclusión</strong> nos hace conscientes de las problemáticas sociales reales que debemos combatir.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-red-50 transition border border-transparent hover:border-red-100">
+                    <i class="fas fa-heartbeat text-3xl text-red-500 mb-4"></i>
+                    <h4 class="font-bold mb-2">Desarrollo Socioemocional</h4>
+                    <p class="text-sm text-gray-600">La <strong>empatía y la escucha activa</strong> son habilidades transversales fundamentales para interactuar como seres humanos integrales.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-blue-50 transition border border-transparent hover:border-blue-100 lg:col-span-2">
+                    <i class="fas fa-compass text-3xl text-blue-500 mb-4"></i>
+                    <h4 class="font-bold mb-2">Trascendencia Ética</h4>
+                    <p class="text-sm text-gray-600">El <strong>proyecto de vida</strong> aterriza todo el conocimiento en nuestra realidad personal. En conjunto, este módulo no solo transmite datos, sino que forja ciudadanos con pensamiento crítico y profunda responsabilidad social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCLUSIONES (Reflection based on module 3) -->
+    <section id="conclusiones" class="bg-gray-900 text-white py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, #1f2937 0, #1f2937 2px, transparent 2px, transparent 8px);"></div>
+        
+        <div class="container mx-auto max-w-4xl relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Mis Conclusiones</h2>
+                <p class="text-gray-400 mt-3 font-semibold uppercase tracking-widest text-sm">Reflexión Final del Módulo 3</p>
+            </div>
+
+            <div class="bg-gray-800/80 backdrop-blur-md p-10 md:p-14 rounded-[3rem] border border-gray-700 shadow-2xl relative">
+                <i class="fas fa-quote-left absolute top-8 left-8 text-gray-700 text-6xl -z-10"></i>
+                
+                <div class="space-y-6 text-gray-300 leading-relaxed text-lg font-light">
+                    <p>
+                        A lo largo de este Módulo 3, he comprendido que la ética dejó de ser un concepto abstracto para convertirse en una <strong>herramienta operativa indispensable</strong>. Aprendí que el <span class="text-green-400 font-bold">capital social</span> no surge por accidente, sino que se construye a diario cuando elegimos colaborar en lugar de competir deslealmente.
+                    </p>
+                    <p>
+                        Al explorar la <span class="text-blue-400 font-bold">ciudadanía global</span>, me di cuenta de que mi huella digital y mi comportamiento en línea tienen un peso real. La tecnología ha borrado fronteras, obligándonos a ejercer una ciudadanía que combate la desinformación y utiliza la conectividad para el activismo positivo.
+                    </p>
+                    <p>
+                        Los temas de exclusión y empatía me llevaron a reflexionar profundamente. Entendí que la verdadera <span class="text-orange-400 font-bold">inclusión</span> requiere <strong>escucha activa</strong>; no basta con tolerar, es necesario hacer un esfuerzo consciente por validar la realidad del otro sin juicios.
+                    </p>
+                    <p>
+                        Finalmente, el "nuevo imperativo categórico" transformó mi visión sobre el <span class="text-yellow-400 font-bold">proyecto de vida</span>. Mis metas profesionales ya no pueden medirse únicamente por el éxito individual, sino por el impacto que mis acciones tendrán en la sociedad y el planeta a futuro. <strong>La ética es, al final del día, la brújula que guiará mi trayectoria personal y profesional.</strong>
+                    </p>
+                </div>
+                
+                <div class="mt-12 flex justify-center">
+                    <div class="h-1.5 w-32 bg-gradient-to-r from-green-500 to-blue-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 py-10 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-6">
+            <h2 class="text-xl font-black text-gray-700 tracking-widest mb-4">CONECTA</h2>
+            <p>&copy; 2026 Blog Académico. Diseño interactivo para el aprendizaje ético y ciudadano.</p>
+            <div class="flex justify-center gap-6 mt-6">
+                <a href="#" class="hover:text-green-500 transition-colors"><i class="fas fa-graduation-cap text-lg"></i></a>
+                <a href="#" class="hover:text-green-500 transition-colors"><i class="fas fa-laptop-code text-lg"></i></a>
+                <a href="#" class="hover:text-green-500 transition-colors"><i class="fas fa-globe text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE INTERACTIVIDAD -->
+    <script>
+        function saveCommitment() {
+            const input = document.getElementById('commitment-input');
+            const msg = document.getElementById('save-msg');
+            
+            if(input.value.trim() !== "") {
+                msg.classList.remove('opacity-0');
+                msg.classList.add('opacity-100');
+                
+                setTimeout(() => {
+                    msg.classList.remove('opacity-100');
+                    msg.classList.add('opacity-0');
+                }, 3000);
+            } else {
+                input.focus();
+                input.classList.add('border-red-400', 'bg-red-50');
+                setTimeout(() => {
+                    input.classList.remove('border-red-400', 'bg-red-50');
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>
