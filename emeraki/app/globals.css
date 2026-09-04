@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #f7f1e7;
+  --color-ivory: #fbf7f0;
+  --color-sand: #efe6d6;
+  --color-ink: #2a251f;
+  --color-ink-soft: #55503f;
+  --color-line: #ddd2ba;
+
+  --color-olive: #6b6b3f;
+  --color-sage: #8a9a7a;
+  --color-terracotta: #b5502a;
+  --color-burnt: #8f3f22;
+  --color-peach: #e3b393;
+  --color-mustard: #c99a3a;
+  --color-botanical: #2f3a24;
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-ivory: var(--color-ivory);
+  --color-sand: var(--color-sand);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-line: var(--color-line);
+  --color-olive: var(--color-olive);
+  --color-sage: var(--color-sage);
+  --color-terracotta: var(--color-terracotta);
+  --color-burnt: var(--color-burnt);
+  --color-peach: var(--color-peach);
+  --color-mustard: var(--color-mustard);
+  --color-botanical: var(--color-botanical);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+::selection {
+  background: var(--color-terracotta);
+  color: var(--color-ivory);
 }
