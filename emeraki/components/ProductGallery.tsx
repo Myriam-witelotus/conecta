@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
+import { PigmentSmear, GroundShadow } from "@/components/PigmentBackdrop";
 
 export default function ProductGallery({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
@@ -11,19 +12,25 @@ export default function ProductGallery({ product }: { product: Product }) {
   return (
     <div>
       <div className="relative aspect-[4/5] bg-ivory overflow-hidden">
-        <div
-          className="absolute -inset-10 opacity-60 blur-3xl"
-          style={{ background: `radial-gradient(circle at 60% 40%, ${product.accent}2e, transparent 65%)` }}
+        <PigmentSmear
+          texture={product.textureImage?.src}
+          accent={product.accent}
+          className="w-[58%] aspect-square top-[8%] right-[6%]"
         />
-        <Image
-          key={image.src}
-          src={image.src}
-          alt={image.alt}
-          fill
-          priority
-          sizes="(min-width: 1024px) 40vw, 90vw"
-          className="object-contain p-8 md:p-10 transition-opacity duration-500"
-        />
+        <GroundShadow className="w-[36%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[13%]" />
+        <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
+          <div className="relative w-[62%] aspect-[4/5]">
+            <Image
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 26vw, 55vw"
+              className="object-contain drop-shadow-[0_18px_26px_rgba(30,26,22,0.16)] transition-opacity duration-500"
+            />
+          </div>
+        </div>
       </div>
       {product.images.length > 1 && (
         <div className="mt-6 flex gap-3">

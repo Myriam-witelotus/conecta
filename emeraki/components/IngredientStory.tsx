@@ -7,11 +7,16 @@ export default function IngredientStory({
   imageAlt,
   notesLeft,
   notesRight,
+  fit = "cover",
+  accent,
 }: {
   image: string;
   imageAlt: string;
   notesLeft: Note[];
   notesRight: Note[];
+  /** use "contain" when `image` is an isolated product cutout rather than a texture photo */
+  fit?: "cover" | "contain";
+  accent?: string;
 }) {
   return (
     <div className="grid md:grid-cols-[1fr_auto_1fr] gap-10 md:gap-6 items-center">
@@ -31,8 +36,17 @@ export default function IngredientStory({
         ))}
       </div>
 
-      <div className="relative order-1 md:order-2 aspect-square w-full md:w-[24rem] mx-auto overflow-hidden rounded-full ring-1 ring-line">
-        <Image src={image} alt={imageAlt} fill sizes="384px" className="object-cover" />
+      <div
+        className="relative order-1 md:order-2 aspect-square w-full md:w-[24rem] mx-auto overflow-hidden rounded-full ring-1 ring-line"
+        style={fit === "contain" ? { backgroundColor: `${accent ?? "#EDE6D6"}22` } : undefined}
+      >
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="384px"
+          className={fit === "contain" ? "object-contain p-14" : "object-cover"}
+        />
       </div>
 
       <div className="space-y-14 order-3">

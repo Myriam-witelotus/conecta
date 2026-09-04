@@ -263,6 +263,35 @@ export const products: Product[] = [
   },
 ];
 
+// short benefit line per ingredient, reused across every product that lists it
+// (placeholder copy — to be confirmed against the real formulas)
+export const ingredientNotes: Record<string, string> = {
+  "Cera de jojoba": "Sostiene la fórmula en crema, sin conservadores agresivos.",
+  "Manteca de karité": "Funde el pigmento en la piel sin sensación pesada.",
+  "Óxidos de hierro": "Dan el color base; no se oxidan con el sudor ni el sol.",
+  "Vitamina E": "Protege el pigmento y la piel de la oxidación diaria.",
+  "Sílice": "Absorbe el exceso de brillo sin resecar la piel.",
+  "Almidón de tapioca": "Difumina el polvo para un acabado invisible.",
+  Caolín: "Equilibra el sebo en zonas de mayor movimiento.",
+  "Extracto de azahar": "Aporta un aroma suave, sin perfume añadido.",
+  Mica: "Da luminosidad natural, sin partícula visible.",
+  Talco: "Aporta suavidad y adherencia al polvo compacto.",
+  "Extracto de malva": "Calma la piel mientras aporta color.",
+  "Extracto de cempasúchil": "Antioxidante natural, propio de la flor.",
+  "Extracto de geranio": "Tonifica visualmente el color de la piel.",
+  "Extracto de camelia": "Aporta suavidad y un dejo luminoso.",
+  "Extracto de magnolia": "Aporta un aroma floral suave y natural.",
+};
+
+export function getIngredientDiagramNotes(product: Product) {
+  const notes = product.ingredients.map((name) => ({
+    title: name,
+    text: ingredientNotes[name] ?? "Ingrediente de la fórmula EMÉRAKI.",
+  }));
+  const mid = Math.ceil(notes.length / 2);
+  return { left: notes.slice(0, mid), right: notes.slice(mid) };
+}
+
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }

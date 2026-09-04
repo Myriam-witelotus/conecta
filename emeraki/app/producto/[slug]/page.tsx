@@ -7,7 +7,8 @@ import { Accordion } from "@/components/Accordion";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
-import { getProductBySlug, products } from "@/lib/products";
+import IngredientStory from "@/components/IngredientStory";
+import { getProductBySlug, getIngredientDiagramNotes, products } from "@/lib/products";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -26,6 +27,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const related = products.filter((p) => p.slug !== product.slug && p.category === product.category);
   const others = (related.length > 0 ? related : products.filter((p) => p.slug !== product.slug)).slice(0, 3);
+  const diagramNotes = getIngredientDiagramNotes(product);
+  const diagramImage = product.textureImage ?? product.images[0];
 
   return (
     <div>
@@ -138,6 +141,29 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* EDITORIAL INGREDIENT DIAGRAM */}
+      <section className="border-t border-line/70 bg-ivory">
+        <div className="mx-auto max-w-5xl px-6 md:px-10 py-20 md:py-28">
+          <div className="max-w-md mb-4">
+            <Eyebrow className="mb-4">La fórmula</Eyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
+              Lo que lleva {product.name}.
+            </h2>
+          </div>
+          <p className="text-[11px] italic text-ink-soft/70 mb-16">
+            * Fórmula de referencia, sujeta a confirmación.
+          </p>
+          <IngredientStory
+            image={diagramImage.src}
+            imageAlt={diagramImage.alt}
+            notesLeft={diagramNotes.left}
+            notesRight={diagramNotes.right}
+            fit={product.textureImage ? "cover" : "contain"}
+            accent={product.accent}
+          />
         </div>
       </section>
 

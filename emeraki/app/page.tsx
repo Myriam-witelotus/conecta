@@ -4,6 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import IngredientStory from "@/components/IngredientStory";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
+import { PigmentSmear, GroundShadow } from "@/components/PigmentBackdrop";
 import { getProductBySlug, products } from "@/lib/products";
 
 const marquee = [
@@ -52,25 +53,28 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="md:col-span-7 order-1 md:order-2 relative aspect-[6/7] md:aspect-auto">
-            <div className="absolute inset-0 bg-ivory" />
-            <div
-              className="absolute inset-0 opacity-[0.55] mix-blend-multiply"
-              style={{
-                backgroundImage: "url(/products/texture-mauve-paste.png)",
-                backgroundSize: "180%",
-                backgroundPosition: "20% 30%",
-              }}
+          <div className="md:col-span-7 order-1 md:order-2 relative aspect-[6/7] md:aspect-auto bg-cream overflow-hidden">
+            {/* large burgundy pigment smear, offset behind the product */}
+            <PigmentSmear
+              texture={hero.textureImage?.src}
+              accent={hero.accent}
+              className="w-[62%] aspect-square top-[6%] right-[4%] blur-[1px]"
             />
-            <div className="absolute inset-0 bg-ivory/55" />
-            <Image
-              src={hero.images[0].src}
-              alt={hero.images[0].alt}
-              fill
-              priority
-              sizes="(min-width: 768px) 58vw, 100vw"
-              className="object-contain p-14 md:p-20 relative"
-            />
+            {/* soft grounding shadow beneath the tin */}
+            <GroundShadow className="w-[38%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[20%] md:bottom-[16%]" />
+            {/* complete product, reduced scale, generous negative space */}
+            <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
+              <div className="relative w-[58%] md:w-[54%] aspect-[4/5]">
+                <Image
+                  src={hero.images[0].src}
+                  alt={hero.images[0].alt}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 32vw, 55vw"
+                  className="object-contain drop-shadow-[0_18px_28px_rgba(30,26,22,0.16)]"
+                />
+              </div>
+            </div>
             <div className="absolute left-6 bottom-6 md:left-10 md:bottom-10 bg-cream/95 px-5 py-4 max-w-[12rem] border-t-2 border-ink">
               <p className="text-[10px] uppercase tracking-[0.14em] text-ink-soft">Destacado</p>
               <p className="font-display text-xl text-ink mt-1">{hero.name}</p>
@@ -95,18 +99,24 @@ export default function Home() {
       {/* FEATURED PAIR — alternating image/text, asymmetric */}
       <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 space-y-24 md:space-y-32">
         <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
-          <div className="md:col-span-7 relative aspect-[5/4] bg-ivory">
-            <div
-              className="absolute inset-12 rounded-full opacity-50 blur-3xl"
-              style={{ background: `radial-gradient(circle, ${pairA.accent}55, transparent 72%)` }}
+          <div className="md:col-span-7 relative aspect-[5/4] bg-ivory overflow-hidden">
+            <PigmentSmear
+              texture={pairA.textureImage?.src}
+              accent={pairA.accent}
+              className="w-[52%] aspect-square top-[10%] left-[8%]"
             />
-            <Image
-              src={pairA.images[0].src}
-              alt={pairA.images[0].alt}
-              fill
-              sizes="(min-width: 768px) 55vw, 100vw"
-              className="object-contain p-10 md:p-16"
-            />
+            <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
+            <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
+              <div className="relative w-[56%] aspect-[4/5]">
+                <Image
+                  src={pairA.images[0].src}
+                  alt={pairA.images[0].alt}
+                  fill
+                  sizes="(min-width: 768px) 30vw, 55vw"
+                  className="object-contain drop-shadow-[0_16px_24px_rgba(30,26,22,0.14)]"
+                />
+              </div>
+            </div>
           </div>
           <div className="md:col-span-4 md:col-start-9">
             <Eyebrow className="mb-4">{pairA.categoryLabel}</Eyebrow>
@@ -149,18 +159,24 @@ export default function Home() {
               Ver producto
             </Link>
           </div>
-          <div className="md:col-span-7 md:col-start-6 order-1 md:order-2 relative aspect-[5/4] bg-ivory">
-            <div
-              className="absolute inset-12 rounded-full opacity-50 blur-3xl"
-              style={{ background: `radial-gradient(circle, ${pairB.accent}55, transparent 72%)` }}
+          <div className="md:col-span-7 md:col-start-6 order-1 md:order-2 relative aspect-[5/4] bg-ivory overflow-hidden">
+            <PigmentSmear
+              texture={pairB.textureImage?.src}
+              accent={pairB.accent}
+              className="w-[52%] aspect-square top-[10%] right-[8%]"
             />
-            <Image
-              src={pairB.images[0].src}
-              alt={pairB.images[0].alt}
-              fill
-              sizes="(min-width: 768px) 55vw, 100vw"
-              className="object-contain p-10 md:p-16"
-            />
+            <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
+            <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
+              <div className="relative w-[56%] aspect-[4/5]">
+                <Image
+                  src={pairB.images[0].src}
+                  alt={pairB.images[0].alt}
+                  fill
+                  sizes="(min-width: 768px) 30vw, 55vw"
+                  className="object-contain drop-shadow-[0_16px_24px_rgba(30,26,22,0.14)]"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
