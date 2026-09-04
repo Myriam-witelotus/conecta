@@ -7,7 +7,7 @@ import { TextureField, getFieldSide } from "@/components/PigmentBackdrop";
 
 export default function ProductGallery({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
-  const image = product.images[active];
+  const image = product.galleryImages[active] ?? product.heroImage;
 
   return (
     <div>
@@ -34,9 +34,9 @@ export default function ProductGallery({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-      {product.images.length > 1 && (
+      {product.galleryImages.length > 1 && (
         <div className="mt-6 flex gap-3">
-          {product.images.map((img, i) => (
+          {product.galleryImages.map((img, i) => (
             <button
               key={img.src}
               onClick={() => setActive(i)}

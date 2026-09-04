@@ -2,23 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import IngredientStory from "@/components/IngredientStory";
+import ImageSlot from "@/components/ImageSlot";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
 import { TextureField, getFieldSide } from "@/components/PigmentBackdrop";
 import { getProductBySlug, products } from "@/lib/products";
+import { homeContent } from "@/lib/content";
 
-const marquee = [
-  "Nueve tonos",
-  "Hecho en Mérida",
-  "Fórmula multiusos",
-  "Difumina con los dedos",
-];
+// EDIT HOMEPAGE CONTENT HERE: all copy/images for this page live in
+// lib/content.ts (homeContent) and lib/products.ts (products) — nothing
+// below is a hardcoded string that needs a code change to update.
 
 export default function Home() {
-  const hero = getProductBySlug("buganvilla")!;
-  const pairA = getProductBySlug("azahar")!;
-  const pairB = getProductBySlug("cempasuchil")!;
-  const rest = products.filter((p) => !["buganvilla", "azahar", "cempasuchil"].includes(p.slug));
+  const hero = getProductBySlug(homeContent.hero.featuredSlug)!;
+  const [pairA, pairB] = homeContent.featuredProducts.slugs.map((slug) => getProductBySlug(slug)!);
+  const featuredSlugs = new Set([hero.slug, pairA.slug, pairB.slug]);
+  const rest = products.filter((p) => !featuredSlugs.has(p.slug));
 
   return (
     <div>
@@ -26,23 +25,21 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="grid md:grid-cols-12 md:min-h-[86vh]">
           <div className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-14 md:py-0">
-            <Eyebrow className="mb-6">Multiusos · Origen mexicano</Eyebrow>
+            <Eyebrow className="mb-6">{homeContent.hero.eyebrow}</Eyebrow>
             <h1 className="font-display text-[3.2rem] leading-[0.98] md:text-[4.2rem] md:leading-[0.96] text-ink">
-              Un color,
+              {homeContent.hero.headingLine1}
               <br />
-              <span className="italic">todos los usos.</span>
+              <span className="italic">{homeContent.hero.headingLine2}</span>
             </h1>
             <p className="mt-7 text-ink-soft leading-relaxed max-w-[26rem] text-[15px]">
-              Nueve tonos inspirados en flores mexicanas, formulados para
-              mejillas, labios y párpados. Se aplican con los dedos y se
-              funden con la piel — sin brochas, sin líneas que difuminar.
+              {homeContent.hero.body}
             </p>
             <div className="mt-10 flex items-center gap-7">
               <Link
                 href="/tienda"
                 className="inline-flex items-center h-11 px-7 bg-ink text-ivory text-[12px] uppercase tracking-[0.14em] hover:bg-ink/85 transition-colors"
               >
-                Ver colección
+                {homeContent.hero.primaryCtaLabel}
               </Link>
               <Link
                 href={`/producto/${hero.slug}`}
@@ -67,8 +64,8 @@ export default function Home() {
             <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
               <div className="relative w-[58%] md:w-[54%] aspect-[4/5]">
                 <Image
-                  src={hero.images[0].src}
-                  alt={hero.images[0].alt}
+                  src={hero.heroImage.src}
+                  alt={hero.heroImage.alt}
                   fill
                   priority
                   sizes="(min-width: 768px) 32vw, 55vw"
@@ -87,18 +84,31 @@ export default function Home() {
         {/* marquee strip */}
         <div className="border-y border-line/70">
           <div className="mx-auto max-w-7xl px-6 md:px-10 py-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] uppercase tracking-[0.14em] text-ink-soft/80">
-            {marquee.map((m, i) => (
+            {homeContent.marquee.map((m, i) => (
               <span key={m} className="flex items-center gap-3">
                 {m}
-                {i < marquee.length - 1 && <span className="text-terracotta">·</span>}
+                {i < homeContent.marquee.length - 1 && <span className="text-terracotta">·</span>}
               </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURED PAIR — alternating image/text, asymmetric */}
-      <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 space-y-24 md:space-y-32">
+      {/* COLLECTION INTRODUCTION */}
+      <section className="mx-auto max-w-7xl px-6 md:px-10 pt-16 pb-4 md:pt-24 grid md:grid-cols-12 gap-8">
+        <div className="md:col-span-7">
+          <Eyebrow className="mb-4">{homeContent.collectionIntro.eyebrow}</Eyebrow>
+          <h2 className="font-display text-3xl md:text-5xl leading-[1.05] text-ink max-w-xl">
+            {homeContent.collectionIntro.heading}
+          </h2>
+        </div>
+        <div className="md:col-span-4 md:col-start-9 flex items-end">
+          <p className="text-ink-soft leading-relaxed text-[15px]">{homeContent.collectionIntro.body}</p>
+        </div>
+      </section>
+
+      {/* FEATURED PRODUCTS — alternating image/text, asymmetric */}
+      <section className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24 space-y-24 md:space-y-32">
         <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
           <div className="md:col-span-7 relative aspect-[5/4] bg-ivory overflow-hidden">
             {pairA.textureImage && (
@@ -112,8 +122,8 @@ export default function Home() {
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
                 <Image
-                  src={pairA.images[0].src}
-                  alt={pairA.images[0].alt}
+                  src={pairA.heroImage.src}
+                  alt={pairA.heroImage.alt}
                   fill
                   sizes="(min-width: 768px) 30vw, 55vw"
                   className="object-contain drop-shadow-[0_7px_9px_rgba(30,26,22,0.2)]"
@@ -123,12 +133,8 @@ export default function Home() {
           </div>
           <div className="md:col-span-4 md:col-start-9">
             <Eyebrow className="mb-4">{pairA.categoryLabel}</Eyebrow>
-            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">
-              {pairA.name}
-            </h2>
-            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">
-              {pairA.tagline}
-            </p>
+            <h3 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">{pairA.name}</h3>
+            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">{pairA.tagline}</p>
             <div className="mt-6 flex items-center gap-3">
               <PriceTag price={pairA.price} size="lg" />
               <span className="text-xs text-ink-soft">· {pairA.weight}</span>
@@ -145,12 +151,8 @@ export default function Home() {
         <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
           <div className="md:col-span-4 order-2 md:order-1">
             <Eyebrow className="mb-4">{pairB.categoryLabel}</Eyebrow>
-            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">
-              {pairB.name}
-            </h2>
-            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">
-              {pairB.tagline}
-            </p>
+            <h3 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">{pairB.name}</h3>
+            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">{pairB.tagline}</p>
             <div className="mt-6 flex items-center gap-3">
               <PriceTag price={pairB.price} size="lg" />
               <span className="text-xs text-ink-soft">· {pairB.weight}</span>
@@ -174,8 +176,8 @@ export default function Home() {
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
                 <Image
-                  src={pairB.images[0].src}
-                  alt={pairB.images[0].alt}
+                  src={pairB.heroImage.src}
+                  alt={pairB.heroImage.alt}
                   fill
                   sizes="(min-width: 768px) 30vw, 55vw"
                   className="object-contain drop-shadow-[0_7px_9px_rgba(30,26,22,0.2)]"
@@ -186,11 +188,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CAMPAIGN MOMENT — full-bleed texture */}
+      {/* CAMPAIGN MOMENT — full-bleed real texture */}
       <section className="relative h-[52vh] md:h-[64vh] overflow-hidden">
         <Image
-          src="/products/texture-red-paste.png"
-          alt="Textura de pigmento cremoso EMÉRAKI en primer plano"
+          src={homeContent.campaignMoment.image.src}
+          alt={homeContent.campaignMoment.image.alt}
           fill
           sizes="100vw"
           className="object-cover"
@@ -198,53 +200,84 @@ export default function Home() {
         <div className="absolute inset-0 bg-ink/10" />
         <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 max-w-xs">
           <p className="font-display italic text-2xl md:text-3xl text-ivory leading-snug drop-shadow">
-            &ldquo;El color se aplica, no se pinta.&rdquo;
+            &ldquo;{homeContent.campaignMoment.quote}&rdquo;
           </p>
         </div>
       </section>
 
-      {/* INGREDIENT STORY */}
+      {/* BRAND PHILOSOPHY */}
+      <section className="border-b border-line/70">
+        <div className="mx-auto max-w-6xl px-6 md:px-10 py-20 md:py-28">
+          <div className="max-w-lg mb-14">
+            <Eyebrow className="mb-4">{homeContent.philosophy.eyebrow}</Eyebrow>
+            <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight mb-5">
+              {homeContent.philosophy.heading}
+            </h2>
+            <p className="text-ink-soft leading-relaxed text-[15px]">{homeContent.philosophy.body}</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-8 border-t border-line/70 pt-10">
+            {homeContent.philosophy.pillars.map((pillar) => (
+              <div key={pillar.title}>
+                <p className="font-display text-lg text-ink mb-2">{pillar.title}</p>
+                <p className="text-sm text-ink-soft leading-relaxed">{pillar.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BOTANICAL / PRODUCT STORYTELLING */}
       <section className="border-b border-line/70 bg-ivory">
         <div className="mx-auto max-w-5xl px-6 md:px-10 py-20 md:py-28">
           <div className="max-w-md mb-16">
-            <Eyebrow className="mb-4">De dónde viene el color</Eyebrow>
+            <Eyebrow className="mb-4">{homeContent.storytelling.eyebrow}</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
-              Pigmentos que se muelen a mano, no que se imprimen.
+              {homeContent.storytelling.heading}
             </h2>
           </div>
           <IngredientStory
-            image="/products/texture-mauve-paste.png"
-            imageAlt="Textura de pigmento cremoso EMÉRAKI"
-            notesLeft={[
-              {
-                title: "Óxidos de hierro",
-                text: "Dan el color base y no se oxidan con el sudor ni el sol.",
-              },
-              {
-                title: "Manteca de karité",
-                text: "Funde el pigmento en la piel sin dejar sensación pesada.",
-              },
-            ]}
-            notesRight={[
-              {
-                title: "Cera de jojoba",
-                text: "Sostiene la fórmula en crema, sin necesidad de conservadores agresivos.",
-              },
-              {
-                title: "Vitamina E",
-                text: "Protege el pigmento y la piel de la oxidación diaria.",
-              },
-            ]}
+            image={homeContent.storytelling.image.src}
+            imageAlt={homeContent.storytelling.image.alt}
+            notesLeft={homeContent.storytelling.notesLeft}
+            notesRight={homeContent.storytelling.notesRight}
           />
+        </div>
+      </section>
+
+      {/* BEAUTY RITUAL — full-bleed alternating section, same language as the PDP "how to use" */}
+      <section className="border-b border-line/70">
+        <div className="grid md:grid-cols-12 md:min-h-[65vh]">
+          <div className="md:col-span-5 flex flex-col justify-center px-6 md:px-14 py-16 md:py-0 order-2 md:order-1">
+            <Eyebrow className="mb-5">{homeContent.ritual.eyebrow}</Eyebrow>
+            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.05] text-ink max-w-sm">
+              {homeContent.ritual.heading}
+            </h2>
+            <ol className="mt-9 space-y-6 max-w-sm">
+              {homeContent.ritual.steps.map((step, i) => (
+                <li key={i} className="flex gap-5">
+                  <span className="font-display text-lg text-terracotta shrink-0">0{i + 1}</span>
+                  <span className="text-sm text-ink-soft leading-relaxed pt-0.5">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="md:col-span-7 order-1 md:order-2">
+            {/* REPLACE LIFESTYLE IMAGE HERE — set homeContent.ritual.image in lib/content.ts */}
+            <ImageSlot
+              image={homeContent.ritual.image}
+              label="Fotografía de ritual / lifestyle — pendiente"
+              aspect="aspect-[4/3] md:aspect-auto md:h-full"
+            />
+          </div>
         </div>
       </section>
 
       {/* REST OF COLLECTION */}
       <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28">
         <div className="flex items-end justify-between mb-12 border-b border-line/70 pb-6">
-          <Eyebrow>El resto de la colección</Eyebrow>
+          <Eyebrow>{homeContent.restOfCollection.eyebrow}</Eyebrow>
           <Link href="/tienda" className="text-[12px] uppercase tracking-[0.12em] text-ink-soft hover:text-ink underline underline-offset-4">
-            Ver todo
+            {homeContent.restOfCollection.linkLabel}
           </Link>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
@@ -254,18 +287,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* SHOP CTA */}
       <section className="border-t border-line/70">
         <div className="mx-auto max-w-4xl px-6 md:px-10 py-24 md:py-32 text-center">
-          <Eyebrow className="mb-5">Hecho en Mérida</Eyebrow>
+          <Eyebrow className="mb-5">{homeContent.shopCta.eyebrow}</Eyebrow>
           <h2 className="font-display text-3xl md:text-5xl text-ink leading-tight">
-            Nueve tonos. Un solo gesto para todos.
+            {homeContent.shopCta.heading}
           </h2>
           <Link
             href="/tienda"
             className="mt-9 inline-flex items-center h-12 px-9 bg-ink text-ivory text-[12px] uppercase tracking-[0.14em] hover:bg-ink/85 transition-colors"
           >
-            Explorar la tienda
+            {homeContent.shopCta.ctaLabel}
           </Link>
         </div>
       </section>

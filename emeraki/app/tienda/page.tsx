@@ -135,8 +135,8 @@ function BannerCard({ product }: { product: Product }) {
           />
         )}
         <Image
-          src={product.images[0].src}
-          alt={product.images[0].alt}
+          src={product.heroImage.src}
+          alt={product.heroImage.alt}
           fill
           sizes="(min-width: 768px) 90vw, 100vw"
           className="object-contain p-10 md:p-14 transition-transform duration-700 group-hover:scale-[1.03]"

@@ -3,12 +3,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
+import ShadeSelector from "@/components/ShadeSelector";
+import ImageSlot from "@/components/ImageSlot";
 import { Accordion } from "@/components/Accordion";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
 import IngredientStory from "@/components/IngredientStory";
-import { getProductBySlug, getIngredientDiagramNotes, products } from "@/lib/products";
+import {
+  getProductBySlug,
+  getRelatedProducts,
+  getSiblingShades,
+  getIngredientDiagramImage,
+  splitKeyIngredients,
+  products,
+} from "@/lib/products";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -25,10 +34,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = products.filter((p) => p.slug !== product.slug && p.category === product.category);
-  const others = (related.length > 0 ? related : products.filter((p) => p.slug !== product.slug)).slice(0, 3);
-  const diagramNotes = getIngredientDiagramNotes(product);
-  const diagramImage = product.textureImage ?? product.images[0];
+  // EDIT PRODUCT INFORMATION HERE: everything below is pulled from the
+  // matching entry in lib/products.ts — this file has no product-specific
+  // content of its own.
+  const others = getRelatedProducts(product);
+  const shadeSiblings = getSiblingShades(product);
+  const diagramNotes = splitKeyIngredients(product);
+  const diagramImage = getIngredientDiagramImage(product);
+  const howToUseImage = product.lifestyleImage ?? product.textureImage;
 
   return (
     <div>
@@ -59,20 +72,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="text-[13px] text-ink-soft">MXN · {product.weight}</span>
           </div>
 
-          <div className="mt-3 flex items-center gap-2">
-            <span
-              className="h-3.5 w-3.5 rounded-full border border-ink/10"
-              style={{ backgroundColor: product.accent }}
-            />
-            <span className="text-[11px] text-ink-soft uppercase tracking-[0.08em]">{product.name}</span>
-          </div>
+          {/* shade selector — only renders when this product has sibling shades */}
+          <ShadeSelector current={product} siblings={shadeSiblings} />
 
           <p className="mt-8 text-sm text-ink-soft leading-relaxed max-w-md">
             {product.description}
           </p>
 
           <div className="mt-8">
-            <AddToCart accent={product.accent} />
+            <AddToCart accent={product.shadeColor} />
           </div>
 
           <div className="mt-12">
@@ -125,10 +133,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </ol>
           </div>
           <div className="md:col-span-7 relative aspect-[4/3] md:aspect-auto order-1 md:order-2">
-            {product.textureImage ? (
+            {howToUseImage ? (
               <Image
-                src={product.textureImage.src}
-                alt={product.textureImage.alt}
+                src={howToUseImage.src}
+                alt={howToUseImage.alt}
                 fill
                 sizes="(min-width: 768px) 58vw, 100vw"
                 className="object-cover"
@@ -136,7 +144,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             ) : (
               <div className="absolute inset-0 bg-cream flex items-center justify-center">
                 <div className="relative w-2/3 aspect-square">
-                  <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="50vw" className="object-contain p-10" />
+                  <Image src={product.heroImage.src} alt={product.heroImage.alt} fill sizes="50vw" className="object-contain p-10" />
                 </div>
               </div>
             )}
@@ -161,9 +169,32 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             imageAlt={diagramImage.alt}
             notesLeft={diagramNotes.left}
             notesRight={diagramNotes.right}
-            fit={product.textureImage ? "cover" : "contain"}
-            accent={product.accent}
+            fit={product.textureImage || product.ingredientImage ? "cover" : "contain"}
+            accent={product.shadeColor}
           />
+        </div>
+      </section>
+
+      {/* BOTANICAL CAMPAIGN SLOT — one per product, ready for the flower photography */}
+      <section className="border-t border-line/70">
+        <div className="mx-auto max-w-5xl px-6 md:px-10 py-16 md:py-20">
+          <Eyebrow className="mb-6">Campaña botánica</Eyebrow>
+          <div className="grid md:grid-cols-3 gap-6 md:gap-10 items-center">
+            <div className="md:col-span-1">
+              {/* REPLACE BOTANICAL IMAGE HERE — set product.botanicalImage in lib/products.ts */}
+              <ImageSlot
+                image={product.botanicalImage}
+                label={`Fotografía botánica — ${product.botanicalName}`}
+                aspect="aspect-[4/5]"
+              />
+            </div>
+            <div className="md:col-span-2">
+              <p className="text-sm text-ink-soft leading-relaxed max-w-md">
+                {product.name} lleva el nombre de {product.botanicalName.toLowerCase()}. Cuando la
+                fotografía de campaña esté lista, aparecerá aquí automáticamente — sin tocar el diseño de la página.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

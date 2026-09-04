@@ -17,7 +17,7 @@ export default function ProductCard({
   imagePadding?: string;
 }) {
   const [hovered, setHovered] = useState(false);
-  const secondary = product.images[1] ?? product.textureImage;
+  const secondary = product.secondaryImage ?? product.galleryImages[1] ?? product.textureImage;
 
   return (
     <Link
@@ -36,8 +36,8 @@ export default function ProductCard({
           />
         )}
         <Image
-          src={product.images[0].src}
-          alt={product.images[0].alt}
+          src={product.heroImage.src}
+          alt={product.heroImage.alt}
           fill
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
           className={`object-contain ${imagePadding} drop-shadow-[0_6px_8px_rgba(30,26,22,0.2)] transition-all duration-700 ease-out ${
@@ -66,7 +66,7 @@ export default function ProductCard({
         <div className="flex items-center gap-2 pt-1 shrink-0">
           <span
             className="h-3 w-3 rounded-full border border-ink/10"
-            style={{ backgroundColor: product.accent }}
+            style={{ backgroundColor: product.shadeColor }}
           />
           <PriceTag price={product.price} />
         </div>
