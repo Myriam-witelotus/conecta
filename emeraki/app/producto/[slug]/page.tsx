@@ -5,6 +5,8 @@ import ProductGallery from "@/components/ProductGallery";
 import AddToCart from "@/components/AddToCart";
 import { Accordion } from "@/components/Accordion";
 import ProductCard from "@/components/ProductCard";
+import Eyebrow from "@/components/Eyebrow";
+import PriceTag from "@/components/PriceTag";
 import { getProductBySlug, products } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -22,43 +24,44 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = products.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 4);
-  const others =
-    related.length > 0
-      ? related
-      : products.filter((p) => p.slug !== product.slug).slice(0, 4);
+  const related = products.filter((p) => p.slug !== product.slug && p.category === product.category);
+  const others = (related.length > 0 ? related : products.filter((p) => p.slug !== product.slug)).slice(0, 3);
 
   return (
     <div>
       <div className="mx-auto max-w-7xl px-6 md:px-10 pt-8 pb-4">
-        <nav className="text-xs uppercase tracking-[0.08em] text-ink-soft flex items-center gap-2">
+        <nav className="text-[11px] uppercase tracking-[0.1em] text-ink-soft flex items-center gap-2">
           <Link href="/tienda" className="hover:text-ink">Tienda</Link>
-          <span>/</span>
+          <span className="text-line">/</span>
           <span>{product.categoryLabel}</span>
-          <span>/</span>
+          <span className="text-line">/</span>
           <span className="text-ink">{product.name}</span>
         </nav>
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 md:px-10 pb-20 grid md:grid-cols-2 gap-12 md:gap-20 items-start">
-        <ProductGallery product={product} />
+      <div className="mx-auto max-w-7xl px-6 md:px-10 pb-24 grid md:grid-cols-12 gap-12 md:gap-10 items-start">
+        <div className="md:col-span-7">
+          <ProductGallery product={product} />
+        </div>
 
-        <div className="md:pt-6 md:sticky md:top-28">
-          <p className="text-xs uppercase tracking-[0.1em] text-terracotta">{product.categoryLabel}</p>
-          <h1 className="font-display text-4xl md:text-5xl text-ink mt-3">{product.name}</h1>
-          <p className="mt-4 text-ink-soft leading-relaxed max-w-md">{product.tagline}</p>
+        <div className="md:col-span-5 md:pt-4 md:sticky md:top-28">
+          <Eyebrow>{product.categoryLabel}</Eyebrow>
+          <h1 className="font-display text-[2.75rem] md:text-6xl leading-[0.98] text-ink mt-4">
+            {product.name}
+          </h1>
+          <p className="mt-5 text-ink-soft leading-relaxed max-w-md text-[15px]">{product.tagline}</p>
 
-          <div className="mt-8 flex items-baseline gap-4">
-            <span className="text-2xl font-display">${product.price}</span>
-            <span className="text-sm text-ink-soft">MXN · {product.weight}</span>
+          <div className="mt-8 flex items-baseline gap-3 border-t border-line/70 pt-6">
+            <PriceTag price={product.price} size="lg" />
+            <span className="text-[13px] text-ink-soft">MXN · {product.weight}</span>
           </div>
 
           <div className="mt-3 flex items-center gap-2">
             <span
-              className="h-4 w-4 rounded-full border border-ink/10"
+              className="h-3.5 w-3.5 rounded-full border border-ink/10"
               style={{ backgroundColor: product.accent }}
             />
-            <span className="text-xs text-ink-soft uppercase tracking-[0.06em]">{product.name}</span>
+            <span className="text-[11px] text-ink-soft uppercase tracking-[0.08em]">{product.name}</span>
           </div>
 
           <p className="mt-8 text-sm text-ink-soft leading-relaxed max-w-md">
@@ -99,54 +102,55 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
 
-      {product.textureImage && (
-        <section className="border-t border-line/70 bg-ivory">
-          <div className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-5">
-              <p className="text-xs uppercase tracking-[0.1em] text-terracotta mb-4">
-                El pigmento
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
-                {product.name}, de cerca.
-              </h2>
-              <p className="mt-5 text-sm text-ink-soft leading-relaxed max-w-sm">
-                Cada tono se muele y se prueba a mano hasta lograr un pigmento
-                que se difumina sin dejar rastro de polvo suelto.
-              </p>
-            </div>
-            <div className="md:col-span-7 relative">
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={product.textureImage.src}
-                  alt={product.textureImage.alt}
-                  fill
-                  sizes="(min-width: 768px) 60vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -left-8 hidden md:block w-40 h-40 bg-cream p-3 border border-line/70">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={product.images[0].src}
-                    alt={product.images[0].alt}
-                    fill
-                    sizes="160px"
-                    className="object-contain p-3"
-                  />
+      {/* HOW TO USE — full-bleed alternating editorial section */}
+      <section className="border-t border-line/70 bg-ivory">
+        <div className="grid md:grid-cols-12 md:min-h-[70vh]">
+          <div className="md:col-span-5 flex flex-col justify-center px-6 md:px-14 py-16 md:py-0 order-2 md:order-1">
+            <Eyebrow className="mb-5">Cómo usar</Eyebrow>
+            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.05] text-ink max-w-sm">
+              Un gesto, tres zonas del rostro.
+            </h2>
+            <ol className="mt-9 space-y-6 max-w-sm">
+              {[product.howToUse, "Difumina con la yema de los dedos hasta que no queden bordes.", "Reaplica según el nivel de color que busques."].map(
+                (step, i) => (
+                  <li key={i} className="flex gap-5">
+                    <span className="font-display text-lg text-terracotta shrink-0">0{i + 1}</span>
+                    <span className="text-sm text-ink-soft leading-relaxed pt-0.5">{step}</span>
+                  </li>
+                )
+              )}
+            </ol>
+          </div>
+          <div className="md:col-span-7 relative aspect-[4/3] md:aspect-auto order-1 md:order-2">
+            {product.textureImage ? (
+              <Image
+                src={product.textureImage.src}
+                alt={product.textureImage.alt}
+                fill
+                sizes="(min-width: 768px) 58vw, 100vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-cream flex items-center justify-center">
+                <div className="relative w-2/3 aspect-square">
+                  <Image src={product.images[0].src} alt={product.images[0].alt} fill sizes="50vw" className="object-contain p-10" />
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.1em] text-terracotta mb-4">
-          Completa el look
-        </p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-14">
-          {others.map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} />
+        <div className="flex items-end justify-between mb-12 border-b border-line/70 pb-6">
+          <Eyebrow>Completa el look</Eyebrow>
+          <Link href="/tienda" className="text-[12px] uppercase tracking-[0.12em] text-ink-soft hover:text-ink underline underline-offset-4">
+            Ver colección
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-16">
+          {others.map((p) => (
+            <ProductCard key={p.slug} product={p} />
           ))}
         </div>
       </section>

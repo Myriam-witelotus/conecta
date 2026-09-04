@@ -2,108 +2,197 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import IngredientStory from "@/components/IngredientStory";
+import Eyebrow from "@/components/Eyebrow";
+import PriceTag from "@/components/PriceTag";
 import { getProductBySlug, products } from "@/lib/products";
+
+const marquee = [
+  "Nueve tonos",
+  "Hecho en Mérida",
+  "Fórmula multiusos",
+  "Difumina con los dedos",
+];
 
 export default function Home() {
   const hero = getProductBySlug("buganvilla")!;
-  const featured = products.filter((p) =>
-    ["buganvilla", "azahar", "cempasuchil", "magnolia"].includes(p.slug)
-  );
+  const pairA = getProductBySlug("azahar")!;
+  const pairB = getProductBySlug("cempasuchil")!;
+  const rest = products.filter((p) => !["buganvilla", "azahar", "cempasuchil"].includes(p.slug));
 
   return (
     <div>
-      {/* HERO */}
+      {/* HERO — asymmetric, full-bleed right */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 md:px-10 pt-14 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-12 gap-10 items-center">
-          <div className="md:col-span-5 order-2 md:order-1">
-            <p className="text-xs uppercase tracking-[0.14em] text-terracotta mb-5">
-              Multiusos · Origen mexicano
-            </p>
-            <h1 className="font-display text-5xl md:text-6xl leading-[1.05] text-ink">
+        <div className="grid md:grid-cols-12 md:min-h-[86vh]">
+          <div className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center px-6 md:px-10 lg:px-16 py-14 md:py-0">
+            <Eyebrow className="mb-6">Multiusos · Origen mexicano</Eyebrow>
+            <h1 className="font-display text-[3.2rem] leading-[0.98] md:text-[4.2rem] md:leading-[0.96] text-ink">
               Un color,
               <br />
               <span className="italic">todos los usos.</span>
             </h1>
-            <p className="mt-6 text-ink-soft leading-relaxed max-w-sm">
+            <p className="mt-7 text-ink-soft leading-relaxed max-w-[26rem] text-[15px]">
               Nueve tonos inspirados en flores mexicanas, formulados para
               mejillas, labios y párpados. Se aplican con los dedos y se
               funden con la piel — sin brochas, sin líneas que difuminar.
             </p>
-            <div className="mt-9 flex items-center gap-6">
+            <div className="mt-10 flex items-center gap-7">
               <Link
                 href="/tienda"
-                className="inline-flex items-center h-12 px-8 bg-ink text-ivory text-sm uppercase tracking-[0.1em] hover:bg-ink/85 transition-colors"
+                className="inline-flex items-center h-11 px-7 bg-ink text-ivory text-[12px] uppercase tracking-[0.14em] hover:bg-ink/85 transition-colors"
               >
                 Ver colección
               </Link>
               <Link
                 href={`/producto/${hero.slug}`}
-                className="text-sm text-ink-soft hover:text-ink underline underline-offset-4"
+                className="text-[13px] text-ink-soft hover:text-ink underline underline-offset-4 decoration-line"
               >
                 Descubre {hero.name}
               </Link>
             </div>
           </div>
 
-          <div className="md:col-span-7 order-1 md:order-2 relative">
-            <div className="relative aspect-[5/4] md:aspect-[4/3]">
-              <div
-                className="absolute inset-6 md:inset-14 rounded-full blur-3xl opacity-70"
-                style={{ background: `radial-gradient(circle, ${hero.accent}3a, transparent 70%)` }}
-              />
-              <Image
-                src={hero.images[0].src}
-                alt={hero.images[0].alt}
-                fill
-                priority
-                sizes="(min-width: 768px) 60vw, 100vw"
-                className="object-contain p-6 md:p-10"
-              />
+          <div className="md:col-span-7 order-1 md:order-2 relative aspect-[6/7] md:aspect-auto">
+            <div className="absolute inset-0 bg-ivory" />
+            <div
+              className="absolute inset-0 opacity-[0.55] mix-blend-multiply"
+              style={{
+                backgroundImage: "url(/products/texture-mauve-paste.png)",
+                backgroundSize: "180%",
+                backgroundPosition: "20% 30%",
+              }}
+            />
+            <div className="absolute inset-0 bg-ivory/55" />
+            <Image
+              src={hero.images[0].src}
+              alt={hero.images[0].alt}
+              fill
+              priority
+              sizes="(min-width: 768px) 58vw, 100vw"
+              className="object-contain p-14 md:p-20 relative"
+            />
+            <div className="absolute left-6 bottom-6 md:left-10 md:bottom-10 bg-cream/95 px-5 py-4 max-w-[12rem] border-t-2 border-ink">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-ink-soft">Destacado</p>
+              <p className="font-display text-xl text-ink mt-1">{hero.name}</p>
+              <p className="text-[12px] text-ink-soft mt-1 leading-snug">{hero.tagline}</p>
             </div>
-            <div className="absolute left-0 bottom-0 md:left-6 md:-bottom-10 bg-ivory px-5 py-4 border border-line/70 max-w-[11rem]">
-              <p className="text-[11px] uppercase tracking-[0.08em] text-ink-soft">Destacado</p>
-              <p className="font-display text-lg text-ink mt-1">{hero.name}</p>
-              <p className="text-xs text-ink-soft mt-0.5">{hero.tagline}</p>
-            </div>
+          </div>
+        </div>
+
+        {/* marquee strip */}
+        <div className="border-y border-line/70">
+          <div className="mx-auto max-w-7xl px-6 md:px-10 py-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] uppercase tracking-[0.14em] text-ink-soft/80">
+            {marquee.map((m, i) => (
+              <span key={m} className="flex items-center gap-3">
+                {m}
+                {i < marquee.length - 1 && <span className="text-terracotta">·</span>}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24 border-t border-line/70">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-terracotta mb-3">
-              La colección
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl text-ink">
-              Cuatro formas de empezar.
+      {/* FEATURED PAIR — alternating image/text, asymmetric */}
+      <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 space-y-24 md:space-y-32">
+        <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
+          <div className="md:col-span-7 relative aspect-[5/4] bg-ivory">
+            <div
+              className="absolute inset-12 rounded-full opacity-50 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${pairA.accent}55, transparent 72%)` }}
+            />
+            <Image
+              src={pairA.images[0].src}
+              alt={pairA.images[0].alt}
+              fill
+              sizes="(min-width: 768px) 55vw, 100vw"
+              className="object-contain p-10 md:p-16"
+            />
+          </div>
+          <div className="md:col-span-4 md:col-start-9">
+            <Eyebrow className="mb-4">{pairA.categoryLabel}</Eyebrow>
+            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">
+              {pairA.name}
             </h2>
+            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">
+              {pairA.tagline}
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              <PriceTag price={pairA.price} size="lg" />
+              <span className="text-xs text-ink-soft">· {pairA.weight}</span>
+            </div>
+            <Link
+              href={`/producto/${pairA.slug}`}
+              className="mt-7 inline-block text-[12px] uppercase tracking-[0.12em] border-b border-ink pb-1 hover:text-terracotta hover:border-terracotta transition-colors"
+            >
+              Ver producto
+            </Link>
           </div>
-          <Link href="/tienda" className="hidden md:block text-sm text-ink-soft hover:text-ink underline underline-offset-4">
-            Ver los nueve tonos
-          </Link>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-14">
-          {featured.map((product, i) => (
-            <ProductCard key={product.slug} product={product} index={i} />
-          ))}
+
+        <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
+          <div className="md:col-span-4 order-2 md:order-1">
+            <Eyebrow className="mb-4">{pairB.categoryLabel}</Eyebrow>
+            <h2 className="font-display text-3xl md:text-[2.6rem] leading-[1.02] text-ink">
+              {pairB.name}
+            </h2>
+            <p className="mt-5 text-ink-soft leading-relaxed text-[15px] max-w-xs">
+              {pairB.tagline}
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              <PriceTag price={pairB.price} size="lg" />
+              <span className="text-xs text-ink-soft">· {pairB.weight}</span>
+            </div>
+            <Link
+              href={`/producto/${pairB.slug}`}
+              className="mt-7 inline-block text-[12px] uppercase tracking-[0.12em] border-b border-ink pb-1 hover:text-terracotta hover:border-terracotta transition-colors"
+            >
+              Ver producto
+            </Link>
+          </div>
+          <div className="md:col-span-7 md:col-start-6 order-1 md:order-2 relative aspect-[5/4] bg-ivory">
+            <div
+              className="absolute inset-12 rounded-full opacity-50 blur-3xl"
+              style={{ background: `radial-gradient(circle, ${pairB.accent}55, transparent 72%)` }}
+            />
+            <Image
+              src={pairB.images[0].src}
+              alt={pairB.images[0].alt}
+              fill
+              sizes="(min-width: 768px) 55vw, 100vw"
+              className="object-contain p-10 md:p-16"
+            />
+          </div>
         </div>
       </section>
 
-      {/* EDITORIAL / INGREDIENT STORY */}
-      <section className="border-t border-line/70 bg-ivory">
+      {/* CAMPAIGN MOMENT — full-bleed texture */}
+      <section className="relative h-[52vh] md:h-[64vh] overflow-hidden">
+        <Image
+          src="/products/texture-red-paste.png"
+          alt="Textura de pigmento cremoso EMÉRAKI en primer plano"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-ink/10" />
+        <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 max-w-xs">
+          <p className="font-display italic text-2xl md:text-3xl text-ivory leading-snug drop-shadow">
+            &ldquo;El color se aplica, no se pinta.&rdquo;
+          </p>
+        </div>
+      </section>
+
+      {/* INGREDIENT STORY */}
+      <section className="border-b border-line/70 bg-ivory">
         <div className="mx-auto max-w-5xl px-6 md:px-10 py-20 md:py-28">
-          <div className="text-center max-w-lg mx-auto mb-16">
-            <p className="text-xs uppercase tracking-[0.14em] text-terracotta mb-4">
-              De dónde viene el color
-            </p>
+          <div className="max-w-md mb-16">
+            <Eyebrow className="mb-4">De dónde viene el color</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
               Pigmentos que se muelen a mano, no que se imprimen.
             </h2>
           </div>
           <IngredientStory
-            image="/products/texture-red-paste.png"
+            image="/products/texture-mauve-paste.png"
             imageAlt="Textura de pigmento cremoso EMÉRAKI"
             notesLeft={[
               {
@@ -129,20 +218,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* REST OF COLLECTION */}
+      <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28">
+        <div className="flex items-end justify-between mb-12 border-b border-line/70 pb-6">
+          <Eyebrow>El resto de la colección</Eyebrow>
+          <Link href="/tienda" className="text-[12px] uppercase tracking-[0.12em] text-ink-soft hover:text-ink underline underline-offset-4">
+            Ver todo
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
+          {rest.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 text-center">
-        <p className="text-xs uppercase tracking-[0.14em] text-terracotta mb-4">
-          Hecho en Mérida
-        </p>
-        <h2 className="font-display text-3xl md:text-5xl text-ink max-w-2xl mx-auto leading-tight">
-          Nueve tonos. Un solo gesto para todos.
-        </h2>
-        <Link
-          href="/tienda"
-          className="mt-9 inline-flex items-center h-12 px-9 bg-ink text-ivory text-sm uppercase tracking-[0.1em] hover:bg-ink/85 transition-colors"
-        >
-          Explorar la tienda
-        </Link>
+      <section className="border-t border-line/70">
+        <div className="mx-auto max-w-4xl px-6 md:px-10 py-24 md:py-32 text-center">
+          <Eyebrow className="mb-5">Hecho en Mérida</Eyebrow>
+          <h2 className="font-display text-3xl md:text-5xl text-ink leading-tight">
+            Nueve tonos. Un solo gesto para todos.
+          </h2>
+          <Link
+            href="/tienda"
+            className="mt-9 inline-flex items-center h-12 px-9 bg-ink text-ivory text-[12px] uppercase tracking-[0.14em] hover:bg-ink/85 transition-colors"
+          >
+            Explorar la tienda
+          </Link>
+        </div>
       </section>
     </div>
   );
