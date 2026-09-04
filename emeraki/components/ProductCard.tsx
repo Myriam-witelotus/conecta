@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
 import PriceTag from "@/components/PriceTag";
-import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
+import { TextureField, getFieldSide } from "@/components/PigmentBackdrop";
 
 export default function ProductCard({
   product,
@@ -18,7 +18,6 @@ export default function ProductCard({
 }) {
   const [hovered, setHovered] = useState(false);
   const secondary = product.images[1] ?? product.textureImage;
-  const smear = getSmearConfig(product.slug);
 
   return (
     <Link
@@ -29,19 +28,19 @@ export default function ProductCard({
     >
       <div className={`relative overflow-hidden bg-ivory ${aspect}`}>
         {product.textureImage && (
-          <PigmentSmear
+          <TextureField
             texture={product.textureImage.src}
-            {...smear}
-            className="w-[38%] aspect-[4/3] top-[10%] right-[9%] transition-opacity duration-700 group-hover:opacity-50"
+            alt={product.textureImage.alt}
+            side={getFieldSide(product.slug)}
+            width="w-[50%]"
           />
         )}
-        <GroundShadow className="w-[30%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[10%]" />
         <Image
           src={product.images[0].src}
           alt={product.images[0].alt}
           fill
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-          className={`object-contain ${imagePadding} transition-all duration-700 ease-out ${
+          className={`object-contain ${imagePadding} drop-shadow-[0_6px_8px_rgba(30,26,22,0.2)] transition-all duration-700 ease-out ${
             secondary && hovered ? "opacity-0 scale-95" : "opacity-100 scale-100"
           }`}
         />
@@ -51,7 +50,7 @@ export default function ProductCard({
             alt={secondary.alt}
             fill
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-            className={`object-contain ${imagePadding} transition-all duration-700 ease-out ${
+            className={`object-contain ${imagePadding} drop-shadow-[0_6px_8px_rgba(30,26,22,0.2)] transition-all duration-700 ease-out ${
               hovered ? "opacity-100 scale-100" : "opacity-0 scale-105"
             }`}
           />

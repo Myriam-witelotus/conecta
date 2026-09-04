@@ -3,26 +3,25 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
-import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
+import { TextureField, getFieldSide } from "@/components/PigmentBackdrop";
 
 export default function ProductGallery({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
   const image = product.images[active];
-  const smear = getSmearConfig(product.slug);
 
   return (
     <div>
       <div className="relative aspect-[4/5] bg-ivory overflow-hidden">
         {product.textureImage && (
-          <PigmentSmear
+          <TextureField
             texture={product.textureImage.src}
-            {...smear}
-            className="w-[42%] aspect-[4/3] top-[10%] right-[7%]"
+            alt={product.textureImage.alt}
+            side={getFieldSide(product.slug)}
+            width="w-[56%]"
           />
         )}
-        <GroundShadow className="w-[36%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[13%]" />
         <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
-          <div className="relative w-[62%] aspect-[4/5]">
+          <div className="relative w-[60%] aspect-[4/5]">
             <Image
               key={image.src}
               src={image.src}
@@ -30,7 +29,7 @@ export default function ProductGallery({ product }: { product: Product }) {
               fill
               priority
               sizes="(min-width: 1024px) 26vw, 55vw"
-              className="object-contain drop-shadow-[0_18px_26px_rgba(30,26,22,0.16)] transition-opacity duration-500"
+              className="object-contain drop-shadow-[0_8px_11px_rgba(30,26,22,0.24)] transition-opacity duration-500"
             />
           </div>
         </div>

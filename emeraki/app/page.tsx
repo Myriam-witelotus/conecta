@@ -4,7 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import IngredientStory from "@/components/IngredientStory";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
-import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
+import { TextureField, getFieldSide } from "@/components/PigmentBackdrop";
 import { getProductBySlug, products } from "@/lib/products";
 
 const marquee = [
@@ -54,17 +54,16 @@ export default function Home() {
           </div>
 
           <div className="md:col-span-7 order-1 md:order-2 relative aspect-[6/7] md:aspect-auto bg-cream overflow-hidden">
-            {/* irregular burgundy cream smear, offset behind the product */}
+            {/* the real cream texture, photographed, occupying a genuine
+                portion of the frame — the product is composed to overlap it */}
             {hero.textureImage && (
-              <PigmentSmear
+              <TextureField
                 texture={hero.textureImage.src}
-                {...getSmearConfig(hero.slug)}
-                className="w-[42%] aspect-[4/3] top-[14%] right-[6%]"
+                alt={hero.textureImage.alt}
+                side={getFieldSide(hero.slug)}
+                width="w-[52%]"
               />
             )}
-            {/* soft grounding shadow beneath the tin */}
-            <GroundShadow className="w-[38%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[20%] md:bottom-[16%]" />
-            {/* complete product, reduced scale, generous negative space */}
             <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
               <div className="relative w-[58%] md:w-[54%] aspect-[4/5]">
                 <Image
@@ -73,7 +72,7 @@ export default function Home() {
                   fill
                   priority
                   sizes="(min-width: 768px) 32vw, 55vw"
-                  className="object-contain drop-shadow-[0_18px_28px_rgba(30,26,22,0.16)]"
+                  className="object-contain drop-shadow-[0_8px_10px_rgba(30,26,22,0.26)]"
                 />
               </div>
             </div>
@@ -103,13 +102,13 @@ export default function Home() {
         <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
           <div className="md:col-span-7 relative aspect-[5/4] bg-ivory overflow-hidden">
             {pairA.textureImage && (
-              <PigmentSmear
+              <TextureField
                 texture={pairA.textureImage.src}
-                {...getSmearConfig(pairA.slug)}
-                className="w-[40%] aspect-[4/3] top-[12%] left-[6%]"
+                alt={pairA.textureImage.alt}
+                side={getFieldSide(pairA.slug)}
+                width="w-[52%]"
               />
             )}
-            <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
                 <Image
@@ -117,7 +116,7 @@ export default function Home() {
                   alt={pairA.images[0].alt}
                   fill
                   sizes="(min-width: 768px) 30vw, 55vw"
-                  className="object-contain drop-shadow-[0_16px_24px_rgba(30,26,22,0.14)]"
+                  className="object-contain drop-shadow-[0_7px_9px_rgba(30,26,22,0.2)]"
                 />
               </div>
             </div>
@@ -165,13 +164,13 @@ export default function Home() {
           </div>
           <div className="md:col-span-7 md:col-start-6 order-1 md:order-2 relative aspect-[5/4] bg-ivory overflow-hidden">
             {pairB.textureImage && (
-              <PigmentSmear
+              <TextureField
                 texture={pairB.textureImage.src}
-                {...getSmearConfig(pairB.slug)}
-                className="w-[40%] aspect-[4/3] top-[12%] right-[6%]"
+                alt={pairB.textureImage.alt}
+                side={getFieldSide(pairB.slug)}
+                width="w-[52%]"
               />
             )}
-            <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
                 <Image
@@ -179,7 +178,7 @@ export default function Home() {
                   alt={pairB.images[0].alt}
                   fill
                   sizes="(min-width: 768px) 30vw, 55vw"
-                  className="object-contain drop-shadow-[0_16px_24px_rgba(30,26,22,0.14)]"
+                  className="object-contain drop-shadow-[0_7px_9px_rgba(30,26,22,0.2)]"
                 />
               </div>
             </div>
