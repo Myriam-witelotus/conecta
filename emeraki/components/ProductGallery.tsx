@@ -3,20 +3,23 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
-import { PigmentSmear, GroundShadow } from "@/components/PigmentBackdrop";
+import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
 
 export default function ProductGallery({ product }: { product: Product }) {
   const [active, setActive] = useState(0);
   const image = product.images[active];
+  const smear = getSmearConfig(product.slug);
 
   return (
     <div>
       <div className="relative aspect-[4/5] bg-ivory overflow-hidden">
-        <PigmentSmear
-          texture={product.textureImage?.src}
-          accent={product.accent}
-          className="w-[58%] aspect-square top-[8%] right-[6%]"
-        />
+        {product.textureImage && (
+          <PigmentSmear
+            texture={product.textureImage.src}
+            {...smear}
+            className="w-[42%] aspect-[4/3] top-[10%] right-[7%]"
+          />
+        )}
         <GroundShadow className="w-[36%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[13%]" />
         <div className="absolute inset-0 flex items-center justify-center p-14 md:p-16">
           <div className="relative w-[62%] aspect-[4/5]">

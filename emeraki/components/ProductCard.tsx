@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/lib/products";
 import PriceTag from "@/components/PriceTag";
+import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
 
 export default function ProductCard({
   product,
@@ -17,6 +18,7 @@ export default function ProductCard({
 }) {
   const [hovered, setHovered] = useState(false);
   const secondary = product.images[1] ?? product.textureImage;
+  const smear = getSmearConfig(product.slug);
 
   return (
     <Link
@@ -26,10 +28,14 @@ export default function ProductCard({
       onMouseLeave={() => setHovered(false)}
     >
       <div className={`relative overflow-hidden bg-ivory ${aspect}`}>
-        <div
-          className="absolute inset-10 rounded-full opacity-60 blur-2xl transition-opacity duration-700 group-hover:opacity-90"
-          style={{ background: `radial-gradient(circle, ${product.accent}30, transparent 72%)` }}
-        />
+        {product.textureImage && (
+          <PigmentSmear
+            texture={product.textureImage.src}
+            {...smear}
+            className="w-[38%] aspect-[4/3] top-[10%] right-[9%] transition-opacity duration-700 group-hover:opacity-50"
+          />
+        )}
+        <GroundShadow className="w-[30%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[10%]" />
         <Image
           src={product.images[0].src}
           alt={product.images[0].alt}

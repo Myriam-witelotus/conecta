@@ -4,7 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import IngredientStory from "@/components/IngredientStory";
 import Eyebrow from "@/components/Eyebrow";
 import PriceTag from "@/components/PriceTag";
-import { PigmentSmear, GroundShadow } from "@/components/PigmentBackdrop";
+import { PigmentSmear, GroundShadow, getSmearConfig } from "@/components/PigmentBackdrop";
 import { getProductBySlug, products } from "@/lib/products";
 
 const marquee = [
@@ -54,12 +54,14 @@ export default function Home() {
           </div>
 
           <div className="md:col-span-7 order-1 md:order-2 relative aspect-[6/7] md:aspect-auto bg-cream overflow-hidden">
-            {/* large burgundy pigment smear, offset behind the product */}
-            <PigmentSmear
-              texture={hero.textureImage?.src}
-              accent={hero.accent}
-              className="w-[62%] aspect-square top-[6%] right-[4%] blur-[1px]"
-            />
+            {/* irregular burgundy cream smear, offset behind the product */}
+            {hero.textureImage && (
+              <PigmentSmear
+                texture={hero.textureImage.src}
+                {...getSmearConfig(hero.slug)}
+                className="w-[42%] aspect-[4/3] top-[14%] right-[6%]"
+              />
+            )}
             {/* soft grounding shadow beneath the tin */}
             <GroundShadow className="w-[38%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[20%] md:bottom-[16%]" />
             {/* complete product, reduced scale, generous negative space */}
@@ -100,11 +102,13 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28 space-y-24 md:space-y-32">
         <div className="grid md:grid-cols-12 gap-8 md:gap-4 items-center">
           <div className="md:col-span-7 relative aspect-[5/4] bg-ivory overflow-hidden">
-            <PigmentSmear
-              texture={pairA.textureImage?.src}
-              accent={pairA.accent}
-              className="w-[52%] aspect-square top-[10%] left-[8%]"
-            />
+            {pairA.textureImage && (
+              <PigmentSmear
+                texture={pairA.textureImage.src}
+                {...getSmearConfig(pairA.slug)}
+                className="w-[40%] aspect-[4/3] top-[12%] left-[6%]"
+              />
+            )}
             <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
@@ -160,11 +164,13 @@ export default function Home() {
             </Link>
           </div>
           <div className="md:col-span-7 md:col-start-6 order-1 md:order-2 relative aspect-[5/4] bg-ivory overflow-hidden">
-            <PigmentSmear
-              texture={pairB.textureImage?.src}
-              accent={pairB.accent}
-              className="w-[52%] aspect-square top-[10%] right-[8%]"
-            />
+            {pairB.textureImage && (
+              <PigmentSmear
+                texture={pairB.textureImage.src}
+                {...getSmearConfig(pairB.slug)}
+                className="w-[40%] aspect-[4/3] top-[12%] right-[6%]"
+              />
+            )}
             <GroundShadow className="w-[34%] aspect-[5/1] left-1/2 -translate-x-1/2 bottom-[14%]" />
             <div className="absolute inset-0 flex items-center justify-center p-10 md:p-14">
               <div className="relative w-[56%] aspect-[4/5]">
